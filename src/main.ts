@@ -1,4 +1,4 @@
-interface GapItem {
+interface GapAnalysisItem {
   article: string;
   subsection: string;
   requirement: string;
@@ -9,7 +9,7 @@ interface GapItem {
   framework: string;
 }
 
-const gapData: GapItem[] = [ 
+const gapAnalysisData: GapAnalysisItem[] = [ 
   
   {
       article: "Article 6: Due Diligence",
@@ -482,7 +482,7 @@ function populateMatrix(): void {
   const tbody = document.getElementById('matrixBody') as HTMLTableSectionElement;
   tbody.innerHTML = '';
 
-  gapData.forEach(item => {
+  gapAnalysisData.forEach(item => {
     const row = document.createElement('tr');
     const priority = getPriority(item.hasGap, item.status);
     const statusClass = getStatusBadge(item.hasGap, item.status);
@@ -507,22 +507,22 @@ function populateMatrix(): void {
 }
 
 function updateStats(): void {
-  const compliant = gapData.filter(item => item.hasGap === "No").length;
-  const gaps = gapData.filter(item => item.hasGap === "Yes").length;
-  const progress = gapData.filter(item => item.status?.includes("In Progress") || item.status?.includes("tracked")).length;
+  const compliant = gapAnalysisData.filter(item => item.hasGap === "No").length;
+  const gaps = gapAnalysisData.filter(item => item.hasGap === "Yes").length;
+  const progress = gapAnalysisData.filter(item => item.status?.includes("In Progress") || item.status?.includes("tracked")).length;
 
   (document.getElementById('compliantCount') as HTMLElement).textContent = compliant.toString();
   (document.getElementById('gapCount') as HTMLElement).textContent = gaps.toString();
   (document.getElementById('progressCount') as HTMLElement).textContent = progress.toString();
-  (document.getElementById('totalCount') as HTMLElement).textContent = gapData.length.toString();
+  (document.getElementById('totalCount') as HTMLElement).textContent = gapAnalysisData.length.toString();
 }
 
 function populateFilters(): void {
   const articleFilter = document.getElementById('articleFilter') as HTMLSelectElement;
   const frameworkFilter = document.getElementById('frameworkFilter') as HTMLSelectElement;
 
-  const articles = [...new Set(gapData.map(item => item.article))].sort();
-  const frameworks = [...new Set(gapData.map(item => item.framework))].sort();
+  const articles = [...new Set(gapAnalysisData.map(item => item.article))].sort();
+  const frameworks = [...new Set(gapAnalysisData.map(item => item.framework))].sort();
 
   for (const article of articles) {
     const option = new Option(article, article);
@@ -548,7 +548,7 @@ function filterMatrix(): void {
     const framework = cells[7].textContent || '';
     const requirement = (cells[2].textContent || '').toLowerCase();
 
-    const matchingItem = gapData.find(item => item.article === article);
+    const matchingItem = gapAnalysisData.find(item => item.article === article);
     const hasGap = matchingItem?.hasGap || '';
 
     const matches = (!articleValue || article === articleValue) &&

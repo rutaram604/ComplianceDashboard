@@ -7,18 +7,18 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: green;
+            background:  rgb(233, 230, 230);
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 1400px;
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            border-radius: 26px;
         }
 
         .header {
@@ -106,10 +106,12 @@
             width: 100%;
             border-collapse: collapse;
             font-size: 14px;
+            margin-left: 10px;
+            margin-right: 10px;
         }
 
         thead {
-            background: linear-gradient(135deg, brown, green);
+            background: rgb(132, 132, 250);
             color: white;
             position: sticky;
             top: 0;
